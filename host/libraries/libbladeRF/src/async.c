@@ -82,6 +82,7 @@ int async_init_stream(struct bladerf_stream **stream,
     lstream->buffers = NULL;
 
     switch(format) {
+        case BLADERF_FORMAT_SC16_Q11_META:
         case BLADERF_FORMAT_SC16_Q11:
             buffer_size_bytes = c16_samples_to_bytes(samples_per_buffer);
             break;
