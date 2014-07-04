@@ -454,6 +454,9 @@ typedef enum {
     BLADERF_LNA_GAIN_MAX         /**< LNA Max Gain */
 } bladerf_lna_gain;
 
+#define BLADERF_LNA_GAIN_MID_DB    3 /* dB */
+#define BLADERF_LNA_GAIN_MAX_DB    6 /* dB */
+
 /**
  * LPF mode
  */
@@ -786,6 +789,20 @@ API_EXPORT
 int CALL_CONV bladerf_get_txvga1(struct bladerf *dev, int *gain);
 
 /**
+ * Set a combined VGA TX gain
+ *
+ * This function computes the optimal TXVGA1 and TXVGA2 gains for a requested
+ * amount of gain
+ *
+ * @param       dev         Device handle
+ * @param       gain        Desired gain
+ *
+ * @return 0 on success, value from \ref RETCODES list on failure
+ */
+API_EXPORT
+int CALL_CONV bladerf_set_tx_gain(struct bladerf *dev, int gain);
+
+/**
  * Set the LNA gain
  *
  * @param       dev         Device handle
@@ -852,6 +869,20 @@ int CALL_CONV bladerf_set_rxvga2(struct bladerf *dev, int gain);
  */
 API_EXPORT
 int CALL_CONV bladerf_get_rxvga2(struct bladerf *dev, int *gain);
+
+/**
+ * Set a combined pre and post LPF RX gain
+ *
+ * This function computes the optimal LNA, RXVGA1, and RVGA2 gains for a
+ * requested amount of gain
+ *
+ * @param       dev         Device handle
+ * @param       gain        Desired gain
+ *
+ * @return 0 on success, value from \ref RETCODES list on failure
+ */
+API_EXPORT
+int CALL_CONV bladerf_set_rx_gain(struct bladerf *dev, int gain);
 
 /**
  * Set the bandwidth of the LMS LPF to specified value in Hz
