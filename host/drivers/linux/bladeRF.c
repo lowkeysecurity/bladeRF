@@ -142,6 +142,8 @@ static void __bladeRF_read_cb(struct urb *urb) {
     unsigned char *buf;
     unsigned long flags;
 
+    dev = (bladerf_device_t *)urb->context;
+
     usb_unanchor_urb(urb);
 
     spin_lock_irqsave(&dev->data_in_lock, flags);
